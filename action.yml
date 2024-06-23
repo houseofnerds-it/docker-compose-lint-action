@@ -9,8 +9,15 @@ inputs:
     description: 'path to docker-compose.yml file'
     required: false
     default: './docker-compose.yml'
+  secret-filename:  # id of input
+    description: 'sed filter to specify what the secret filenames are'
+    required: false
+    default: 'docker-compose.secret.yml'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.compose-file }}
+  env:
+    secret_filename: "${{ inputs.secret-filename }}"
+
